@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<!-- Start with light theme as default, per user request -->
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My College Finance - Financial Success Fundamentals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Base & Variables --- */
+        :root {
+            --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        /* --- Light Theme Variables (From User's Second Code Block) --- */
+        :root[data-theme="light"] {
+            --primary-color: #1a365d;
+            --primary-hover: #2c5282;
+            /* Slightly Lighter Blue */
+            --text-color: #2d3748;
+            /* Dark Gray */
+            --text-muted: #718096;
+            /* Medium Gray */
+            --page-bg: #f0f4f8;
+            /* Lighter Gray-Blue page BG */
+            --container-bg: #ffffff;
+            /* White container */
+            --card-bg: #ffffff;
+            /* White cards */
+            --card-bg-two: #eff1f3;
+            --border-color: #e2e8f0;
+            /* Light Gray border */
+            --highlight-bg: #ebf8ff;
+            /* Light Blue highlight */
+            --link-color: #2b6cb0;
+            /* Standard Blue link */
+            --link-hover-color: #2c5282;
+            /* Darker blue link hover */
+            --key-point-bg: #e6fffa;
+            /* Light Teal */
+            --key-point-border: #38b2ac;
+            /* Teal */
+            --example-bg: #f0fff4;
+            /* Light Mint */
+            --example-border: #48bb78;
+            /* Mint */
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            /* Softer shadow */
+            --shadow-lg-color: rgba(0, 0, 0, 0.12);
+            --header-text-color: #ffffff;
+            --button-text-color: #ffffff;
+            /* White text on blue buttons */
+            --btt-bg: var(--primary-color);
+            --btt-hover-bg: var(--primary-hover);
+            --btt-text: #ffffff;
+            /* White text on blue button */
+        }
+
+        /* --- Dark Theme Variables (From User's First Code Block, with Contrast Enhancements) --- */
+        :root[data-theme="dark"] {
+            --primary-color: #3a6ea5;
+            /* Brighter Blue for contrast */
+            --primary-hover: #93c5fd;
+            /* Even Brighter Blue hover */
+            --text-color: #e5e7eb;
+            /* Light Gray text */
+            --text-muted: #ced4da;
+            /* Medium Gray text */
+            --page-bg: #111827;
+            /* Very Dark Blue/Gray background */
+            --container-bg: #1f2937;
+            /* Dark Gray/Blue container */
+            --card-bg: #1a365d;
+            /* Slightly lighter dark card */
+            --card-bg-two: #252323;
+            --border-color: #4b5563;
+            /* Gray border */
+            --highlight-bg: #374151;
+            /* Darker highlight */
+            --link-color: #93c5fd;
+            /* Light Blue link */
+            --link-hover-color: #dbeafe;
+            /* Very light blue link hover */
+            --key-point-bg: #1f2937;
+            /* Dark background for KP */
+            --key-point-border: #34d399;
+            /* Green border */
+            --example-bg: #1f2937;
+            /* Dark background for Ex */
+            --example-border: #60a5fa;
+            /* Blue border */
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --shadow-lg-color: rgba(0, 0, 0, 0.3);
+            --header-text-color: #ffffff;
+            --button-text-color: #1f2937;
+            /* Dark text on light buttons */
+            --btt-bg: var(--primary-color);
+            --btt-hover-bg: var(--primary-hover);
+            --btt-text: #1f2937;
+            /* Dark text on light blue button */
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* --- BODY --- */
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            margin: 0;
+            padding: 2.5rem 1rem;
+            background-color: var(--page-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px var(--shadow-color);
+            overflow: hidden;
+            padding: 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- HEADER --- */
+        .header {
+            background-color: var(--primary-color);
+            color: var(--header-text-color);
+            text-align: center;
+            padding: 2.5rem 1.5rem 2rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .company-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .company-logo {
+            height: 45px;
+            max-height: 50px;
+            width: auto;
+        }
+
+        .company-name {
+            font-size: clamp(1.4rem, 4vw, 1.6rem);
+            font-weight: 700;
+            color: var(--header-text-color);
+            margin: 0;
+        }
+
+        .header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--header-text-color);
+        }
+
+        .header p {
+            margin: 0;
+            font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+            opacity: 0.9;
+            color: var(--header-text-color);
+        }
+
+        /* --- CONTROLS AREA (Theme + PDF) --- */
+        .controls-area {
+            background-color: var(--container-bg);
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            /* Start with transparent border */
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            font-size: 0.8rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-color: var(--primary-color);
+            /* Set border color to match background */
+        }
+
+        .btn:hover,
+        .btn:focus-visible {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: var(--button-text-color);
+            outline: none;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            transform: translateY(-1px);
+        }
+
+        /* Ensure dark theme button text contrasts */
+        :root[data-theme="dark"] .btn {
+            color: var(--text-muted);
+            background-color: var(--card-bg)
+        }
+
+        :root[data-theme="dark"] .btn:hover,
+        :root[data-theme="dark"] .btn:focus-visible {
+            color: white;
+        }
+
+
+        /* --- CONTENT AREA --- */
+        .content-area {
+            padding: 2.5rem 2rem;
+        }
+
+        /* --- LESSON SECTIONS --- */
+        .lesson-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .lesson-section h2 {
+            /* This is the BASE style, applies to light theme */
+            color: var(--primary-color);
+            margin: 0 0 1.5rem 0;
+            border-bottom: 2px solid var(--border-color);
+            /* Subtle border */
+            padding-bottom: 0.75rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 700;
+            /* Make sure transition includes color */
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* --- NEW RULE FOR DARK THEME --- */
+        [data-theme="dark"] .lesson-section h2 {
+            color: white;
+            /* Override color to white for dark theme */
+            /* You might want to adjust the border color too for better contrast */
+            border-bottom-color: var(--border-color);
+            /* Uses dark theme's border color */
+        }
+
+        .lesson-section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .lesson-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .lesson-section h2 {
+            color: var(--primary-color);
+            margin: 0 0 1.5rem 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 700;
+        }
+
+        .lesson-section h3 {
+            margin: 2rem 0 1rem 0;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        /* --- INFO BOXES (Key Point, Example) --- */
+        .key-point,
+        .example {
+            margin: 1.8rem 0;
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            border-left-width: 5px;
+            border-left-style: solid;
+            background-color: var(--card-bg-two);
+            /* Use card bg for better dark mode */
+        }
+
+        .key-point {
+            border-left-color: var(--key-point-border);
+        }
+
+        .example {
+            border-left-color: var(--example-border);
+        }
+
+        .key-point h3,
+        .example h3 {
+            margin: 0 0 0.75rem 0;
+            font-size: 1.15rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .key-point p,
+        .example p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- TYPOGRAPHY & LISTS --- */
+        p {
+            margin: 0 0 1.25rem 0;
+            color: var(--text-color);
+        }
+
+        .content-area p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        ul,
+        ol {
+            padding-left: 25px;
+            margin: 0 0 1.25rem 0;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        li::marker {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        li strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        a:hover,
+        a:focus {
+            color: var(--link-hover-color);
+            text-decoration: none;
+        }
+
+        /* --- Back to Top Button --- */
+        #back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--btt-bg);
+            color: var(--btt-text);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 22px;
+            line-height: 45px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow-lg-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        #back-to-top.visible {
+            opacity: 0.9;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            background-color: var(--btt-hover-bg);
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        /* --- Utility for PDF Hiding --- */
+        .hide-for-pdf {
+            display: none !important;
+        }
+
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 0.5rem;
+                font-size: 15px;
+            }
+
+            .container {
+                margin: 0;
+                width: 100%;
+                border-radius: 8px;
+            }
+
+            .header {
+                padding: 2rem 1rem 1.5rem 1rem;
+            }
+
+            .company-logo {
+                height: 40px;
+            }
+
+            .controls-area {
+                padding: 0.75rem 1rem;
+                justify-content: center;
+            }
+
+            .content-area {
+                padding: 2rem 1rem;
+            }
+
+            .lesson-section {
+                padding: 1.5rem 1rem;
+                border-radius: 8px;
+            }
+
+            .key-point,
+            .example {
+                padding: 1rem;
+            }
+
+            /* Ensure page breaks work in print context */
+            .lesson-section {
+                page-break-before: always;
+                break-before: page;
+            }
+        }
+
+
+        /* --- PRINT STYLES (Optimized for Readability) --- */
+               /* --- PRINT STYLES (E-book / Professional Document Look) --- */
+        @media print {
+
+            /* --- Page Setup --- */
+            @page {
+                size: letter portrait;
+                margin: 0.75in; /* Standard document margins */
+            }
+
+            /* --- Base Body & Font --- */
+            body {
+                font-family: 'Times New Roman', Times, serif; /* Classic serif font */
+                font-size: 11pt; /* Standard document font size */
+                line-height: 1.5; /* Readable line spacing */
+                color: #000000 !important; /* Force black text */
+                background-color: #ffffff !important; /* Force white background */
+                padding: 0 !important;
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact !important; /* Try to force colors if needed, though usually overridden */
+                print-color-adjust: exact !important;
+            }
+
+            /* --- General Element Hiding --- */
+            .controls-area,       /* Theme/PDF buttons */
+            .company-banner,      /* Logo/Name banner */
+            #back-to-top,         /* Back to top button */
+            .hide-for-pdf         /* Anything explicitly marked */
+            {
+                display: none !important;
+            }
+
+            /* --- Container Reset --- */
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important; /* Page margins handle spacing */
+                box-shadow: none !important;
+                border: none !important;
+                background: none !important;
+            }
+
+             /* --- Document Header (Title/Subtitle) --- */
+            .header { /* This is the printable header defined in #content-to-print */
+                background: none !important;
+                color: #000 !important;
+                text-align: left; /* Left align for document */
+                padding: 0 0 15pt 0 !important; /* Bottom padding */
+                margin-bottom: 25pt !important; /* Space after header */
+                border-bottom: 2px solid #000 !important; /* Clear separator */
+            }
+            .header h1 {
+                font-size: 18pt !important; /* Large main title */
+                margin: 0 0 4pt 0 !important; /* Reduced margin */
+                font-weight: bold;
+                color: #000 !important;
+                line-height: 1.2;
+            }
+            .header p { /* Subtitle */
+                font-size: 12pt !important;
+                margin: 0 !important;
+                color: #333 !important; /* Slightly lighter than pure black */
+                opacity: 1 !important;
+                font-style: italic; /* Italicize subtitle */
+                line-height: 1.3;
+            }
+
+             /* --- Content Area Reset --- */
+            .content-area {
+                padding: 0 !important;
+            }
+
+            /* --- Lesson Sections --- */
+            .lesson-section {
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 0 25pt 0 !important; /* Space between sections */
+                padding: 0 !important;
+                background: none !important;
+                page-break-before: auto; /* Allow browser to break pages before sections if needed */
+                page-break-inside: avoid; /* Try to keep section content together */
+            }
+            .lesson-section:last-child {
+                margin-bottom: 0 !important;
+            }
+
+            /* --- Section Headings (H2) --- */
+            .lesson-section h2 {
+                font-size: 14pt !important;
+                border-bottom: 1px solid #555 !important; /* Lighter border */
+                padding-bottom: 4pt !important;
+                margin: 0 0 15pt 0 !important; /* Space below heading */
+                font-weight: bold;
+                color: #000 !important;
+                page-break-after: avoid; /* Don't break page immediately after heading */
+                text-align: left; /* Ensure left align */
+            }
+
+            /* --- Subheadings (H3 within lesson) --- */
+            .lesson-section h3 {
+                font-size: 12pt !important;
+                margin: 18pt 0 8pt 0 !important; /* Space above/below */
+                font-weight: bold;
+                color: #000 !important;
+                page-break-after: avoid;
+                text-align: left;
+            }
+
+            /* --- Paragraphs --- */
+            p {
+                margin: 0 0 10pt 0; /* Standard paragraph spacing */
+                color: #000 !important;
+                text-align: justify; /* Justify text for block look */
+                font-size: 11pt;
+                line-height: 1.5;
+            }
+            .content-area p:last-of-type {
+                 margin-bottom: 0; /* Remove margin from last paragraph in section */
+            }
+
+            /* --- Lists --- */
+            ul, ol {
+                padding-left: 20pt !important; /* Indentation */
+                margin: 10pt 0 !important; /* Space around lists */
+            }
+            li {
+                margin-bottom: 6pt !important; /* Space between list items */
+                font-size: 11pt;
+                color: #000 !important;
+                text-align: justify; /* Justify list item text */
+            }
+            li::marker {
+                color: #000 !important; /* Black markers */
+                font-weight: normal; /* Normal weight markers */
+            }
+            li strong {
+                color: #000 !important;
+                font-weight: bold;
+            }
+
+            /* --- Info Boxes (Key Point, Example) --- */
+            .key-point,
+            .example {
+                border: 1px solid #cccccc !important; /* Lighter border */
+                border-left-width: 3px !important; /* Keep emphasis */
+                padding: 10pt !important; /* Internal padding */
+                margin: 12pt 0 12pt 15pt !important; /* Vertical space and indent */
+                background-color: #f8f8f8 !important; /* Very subtle background */
+                border-radius: 0 !important; /* Square corners */
+                page-break-inside: avoid; /* Try to keep box content together */
+            }
+             .key-point { border-left-color: #555 !important; } /* Darker grey emphasis */
+             .example { border-left-color: #777 !important; } /* Medium grey emphasis */
+
+            .key-point h3,
+            .example h3 { /* Titles within boxes */
+                font-size: 11pt !important;
+                margin: 0 0 5pt 0 !important;
+                font-weight: bold;
+                font-style: italic; /* Italicize */
+                color: #000 !important;
+                border-bottom: none !important; /* Remove border */
+                padding-bottom: 0 !important;
+            }
+            .key-point p,
+            .example p {
+                font-size: 10pt !important; /* Slightly smaller text */
+                color: #222 !important;
+                margin-bottom: 5pt;
+                text-align: left; /* Left align text within boxes */
+                 line-height: 1.4;
+            }
+             .key-point p:last-child,
+             .example p:last-child {
+                margin-bottom: 0; /* Remove bottom margin on last paragraph */
+            }
+
+            /* --- Links --- */
+            a {
+                color: #000 !important;
+                text-decoration: underline !important; /* Underline links */
+            }
+             /* Show URL after links */
+            a[href^="http"]::after,
+            a[href^="https"]::after {
+                content: " (" attr(href) ")";
+                font-size: 9pt;
+                font-style: italic;
+                color: #444;
+                word-break: break-all; /* Allow long URLs to break */
+                /* Prevent printing after specific links if needed */
+                 /* a.internal-link::after { content: ""; } */
+            }
+
+             /* --- Force Initial Root Styles (Experimental, may not be needed) --- */
+            /* :root { all: initial !important; } */
+
+        } /* End @media print */
+    </style>
+</head>
+
+<body>
+    <!-- Main container -->
+    <div class="container">
+
+        <!-- Content for PDF generation -->
+        <div id="content-to-print">
+            <header class="header">
+                <div class="company-banner">
+                    <img src="https://static.wixstatic.com/media/c24a60_577eb503a3c1402b846b9ec4a2afd46e~mv2.png" alt="My College Finance Logo" class="company-logo">
+                    <h2 class="company-name">My College Finance</h2>
+                </div>
+                <h1>Financial Success Fundamentals</h1>
+                <p>Understanding Credit, Money Management, and Scholarships</p>
+            </header>
+
+            <!-- Controls Area - outside the main printable content -->
+            <div class="controls-area">
+                <button class="btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Theme">Theme</button>
+                <button class="btn" onclick="generatePDF()" aria-label="Download Page as PDF">Download PDF</button>
+            </div>
+
+            <!-- Content sections wrapper -->
+            <div class="content-area">
+
+                <!-- Credit Section -->
+                <section id="credit" class="lesson-section" aria-labelledby="credit-heading">
+                    <h2 id="credit-heading">Credit: Your Financial Foundation</h2>
+                    <div class="key-point">
+                        <h3>What is Credit?</h3>
+                        <p>Credit represents your financial reputation and history of borrowing and repayment. It signals your trustworthiness to lenders, businesses, and sometimes landlords or employers. Building and maintaining good credit is essential for accessing financial products and opportunities affordably.</p>
+                    </div>
+                    <h3>Why Good Credit Matters</h3>
+                    <p>A strong credit history significantly impacts various aspects of your financial life:</p>
+                    <ul>
+                        <li><strong>Loan Approvals & Interest Rates:</strong> Higher scores lead to better chances of approval for mortgages, car loans, and personal loans, often at much lower interest rates, saving you substantial amounts of money over time.</li>
+                        <li><strong>Housing Opportunities:</strong> Landlords frequently check credit reports to assess tenant reliability. Good credit can make it easier to rent an apartment and may result in lower security deposits.</li>
+                        <li><strong>Insurance Premiums:</strong> In many areas, credit history is a factor in determining auto and homeowner's insurance rates. Better credit can lead to lower premiums.</li>
+                        <li><strong>Utility & Cell Phone Plans:</strong> Companies may require deposits for services if your credit history is poor or limited. Good credit often waives these deposit requirements.</li>
+                        <li><strong>Employment:</strong> Some employers, particularly in financial sectors or roles involving handling money, may review a modified version of your credit report as part of the background check process.</li>
+                    </ul>
+                    <div class="example">
+                        <h3>Example: The Cost of Poor Credit</h3>
+                        <p>Consider two individuals applying for a $250,000 mortgage. Sarah, with excellent credit (760+), qualifies for a 6.0% interest rate. Her monthly principal and interest payment is roughly $1,499. Tom, with fair credit (640), qualifies for a 7.5% rate. His payment is about $1,748. Over 30 years, Tom will pay approximately $90,000 more in interest than Sarah due solely to the difference in their credit scores.</p>
+                    </div>
+                    <p><em>(For detailed strategies on building credit, refer to resources on responsible credit card use, payment history, and credit utilization available through My College Finance.)</em></p>
+                </section>
+
+                <!-- Money Management Section -->
+                <section id="money" class="lesson-section" aria-labelledby="money-heading">
+                    <h2 id="money-heading">Money Management: Path to Financial Stability</h2>
+                    <div class="key-point">
+                        <h3>The Foundation of Financial Freedom</h3>
+                        <p>Effective money management involves consciously directing your financial resources to align with your goals and values. It encompasses budgeting, saving, investing, and managing debt to build long-term security and achieve financial independence.</p>
+                    </div>
+                    <h3>Core Money Management Principles</h3>
+                    <ul>
+                        <li><strong>Budgeting & Tracking:</strong> Understand where your money comes from and where it goes. Create a realistic spending plan (e.g., the 50/30/20 guideline: 50% Needs, 30% Wants, 20% Savings/Debt Repayment) and monitor your progress. Use tools like apps or spreadsheets.</li>
+                        <li><strong>Building an Emergency Fund:</strong> Prepare for unexpected events (job loss, medical bills, car repairs) by saving 3-6 months' worth of essential living expenses in an easily accessible savings account. This prevents derailing your long-term goals or going into debt during crises.</li>
+                        <li><strong>Strategic Debt Management:</strong> Not all debt is equal. Prioritize paying off high-interest debt (like credit cards) aggressively while managing lower-interest debt (like federal student loans or mortgages) according to your plan. Understand terms and interest rates.</li>
+                        <li><strong>Saving & Investing for Goals:</strong> Define short-term (e.g., vacation, car down payment) and long-term (e.g., retirement, house purchase) goals. Automate regular contributions to savings and investment accounts (like a 401(k) or IRA) to benefit from compound growth.</li>
+                        <li><strong>Regular Review & Adjustment:</strong> Life circumstances and financial goals change. Review your budget, savings progress, and investment performance at least annually, adjusting your plan as needed.</li>
+                    </ul>
+                    <div class="example">
+                        <h3>Example: The Power of Automation</h3>
+                        <p>Maria set up an automatic transfer of $200 from her checking account to her high-yield savings account every payday. Within two years, without feeling like she was actively "saving" each time, she accumulated nearly $5,000 for her emergency fund, providing significant peace of mind.</p>
+                    </div>
+                    <p><em>(Explore My College Finance resources for specific budgeting techniques, debt reduction strategies, and introductory investment information.)</em></p>
+                </section>
+
+                <!-- Scholarships Section -->
+                <section id="scholarships" class="lesson-section" aria-labelledby="scholarships-heading">
+                    <h2 id="scholarships-heading">Scholarships: Funding Your Education Wisely</h2>
+                    <div class="key-point">
+                        <h3>Reducing the Burden of College Costs</h3>
+                        <p>Scholarships are a form of financial aid, often called "gift aid," that does not need to be repaid. They are awarded based on various criteria, including academic achievement, financial need, talents, community involvement, heritage, field of study, and more. Maximizing scholarship awards is crucial for minimizing reliance on student loans.</p>
+                    </div>
+                    <h3>Strategies for Scholarship Success</h3>
+                    <ul>
+                        <li><strong>Start Early & Research Thoroughly:</strong> Begin searching well before college application deadlines (even in early high school). Utilize comprehensive online databases (like Scholarship America, College Board's BigFuture, Fastweb), check local community foundations, civic groups (Rotary, Lions Club), parent's employers, professional associations related to your intended major, and the specific financial aid websites of colleges you're considering.</li>
+                        <li><strong>Get Organized:</strong> Create a detailed spreadsheet or use a dedicated app to track scholarship names, eligibility requirements, deadlines, required documents (essays, transcripts, recommendation letters), login information, and submission status. Missing a deadline means missing an opportunity.</li>
+                        <li><strong>Tailor Every Application:</strong> Resist the urge to submit generic applications. Carefully read the mission of the awarding organization and the specific essay prompts. Customize your responses to highlight experiences and qualities that directly align with what they are looking for.</li>
+                        <li><strong>Showcase Your Unique Story:</strong> Go beyond grades and test scores. Elaborate on your extracurricular activities, leadership roles, volunteer work, part-time jobs, unique skills or talents, family background, or challenges you've overcome that demonstrate resilience and character.</li>
+                        <li><strong>Craft Compelling Essays:</strong> Start essays with a strong hook, be specific with examples, maintain a positive tone (even when discussing challenges), and clearly articulate your goals and how the scholarship will help you achieve them. Proofread meticulously for grammar, spelling, and clarity.</li>
+                        <li><strong>Secure Strong Recommendation Letters:</strong> Ask teachers, counselors, mentors, or employers who know you well and can speak positively about your abilities, character, and potential. Provide them ample notice (at least 3-4 weeks), your resume, the scholarship details, specific forms, and pre-addressed stamped envelopes if needed. Gently follow up before the deadline.</li>
+                        <li><strong>Apply Widely and Persistently:</strong> Don't limit yourself to large, national scholarships. Apply for smaller, local awards, which often have significantly less competition. Treat scholarship searching like a part-time job – consistency is key. Don't be discouraged by rejections.</li>
+                    </ul>
+                    <div class="example">
+                        <h3>Example: Local Focus Pays Off</h3>
+                        <p>David focused his search on scholarships offered by organizations within his county and those specific to his intended major (engineering). While national competition was fierce, he won three smaller local awards ($1000, $1500, $2500) from local businesses and the university's engineering department, significantly reducing his first-year costs.</p>
+                    </div>
+                    <p><em>(My College Finance offers guides on finding scholarships and writing effective application essays.)</em></p>
+                </section>
+
+            </div> <!-- End .content-area -->
+
+        </div> <!-- End #content-to-print -->
+
+    </div> <!-- End .container -->
+
+    <!-- Back to Top Button HTML -->
+    <a href="#" id="back-to-top" aria-label="Back to Top" title="Back to Top" class="hide-for-pdf">↑</a>
+
+
+    <script>
+        // --- Theme Toggle ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            try {
+                localStorage.setItem('theme', newTheme);
+            } catch (e) {
+                console.error("Could not save theme to localStorage", e);
+            }
+        }
+
+        // --- PDF Generation Function (Revised Options) ---
+        // --- PDF Generation Functions (Using window.print) ---
+
+        function prepareForPrint() {
+            console.log("--- prepareForPrint START ---");
+            // Add a class to the body, styles in @media print will handle hiding/showing
+            document.body.classList.add('print-active');
+
+            // Update the document title for potentially better print headers/footers
+            // You can customize this title further if needed
+            document.title = "MyCollegeFinance - Financial Fundamentals";
+
+            // NOTE: Unlike the budget planner, we don't need to dynamically create
+            // '.print-value' spans here because the content is mostly static text.
+            // We will rely purely on the @media print CSS rules to hide elements
+            // like buttons, banners, etc.
+
+            console.log("--- prepareForPrint END ---");
+        }
+
+        function restoreAfterPrint() {
+            console.log("--- restoreAfterPrint START ---");
+            // Remove the helper class from the body
+            document.body.classList.remove('print-active');
+
+            // Restore original title
+            document.title = "My College Finance - Financial Success Fundamentals";
+
+            // NOTE: No need to restore dynamically created spans or hidden inputs/labels
+            // as they weren't manipulated in the adapted prepareForPrint function.
+            // The browser handles reverting @media print styles automatically.
+
+            console.log("--- restoreAfterPrint END ---");
+        }
+
+        function generatePDF() {
+            // This function now uses the browser's native print functionality
+            try {
+                console.log("generatePDF called (using window.print)");
+                prepareForPrint(); // Prepare the document (e.g., add class, set title)
+
+                // Use setTimeout to allow the browser to potentially apply styles
+                // before triggering the print dialog. 100-300ms is usually enough.
+                setTimeout(() => {
+                    try {
+                        console.log("Calling window.print()...");
+                        window.print(); // Trigger the browser's print dialog
+                        console.log("window.print() called.");
+
+                        // Restore the page after a delay.
+                        // This delay is a bit arbitrary; it needs to be long enough
+                        // for the print dialog to be processed by the user, but
+                        // ideally not so long it's annoying if they cancel quickly.
+                        // Adjust the timeout (e.g., 1000ms = 1 second) if needed.
+                        setTimeout(restoreAfterPrint, 1500);
+
+                    } catch (printError) {
+                        console.error("Error during window.print():", printError);
+                        alert("An error occurred while trying to print.");
+                        restoreAfterPrint(); // Still try to restore on error
+                    }
+                }, 300); // 300ms delay before printing
+
+            } catch (prepareError) {
+                console.error("Error during prepareForPrint():", prepareError);
+                alert("An error occurred while preparing the document for printing.");
+                restoreAfterPrint(); // Still try to restore on error
+            }
+        }
+
+        // --- Back to Top Button Logic ---
+        const backToTopButtonInstance = document.getElementById('back-to-top');
+        if (backToTopButtonInstance) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    backToTopButtonInstance.classList.add('visible');
+                } else {
+                    backToTopButtonInstance.classList.remove('visible');
+                }
+            });
+            backToTopButtonInstance.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+
+        // --- Initial Load Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark' || savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {
+                console.error("Could not access theme preference", e);
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+            console.log("Page loaded. Current theme:", document.documentElement.getAttribute('data-theme'));
+        });
+    </script>
+
+</body>
+
+</html>
