@@ -201,7 +201,7 @@
             gap: 0.75rem;
         }
 
-       /* --- BUTTONS --- */
+        /* --- BUTTONS --- */
         .btn,
         button {
             /* Apply base styles to all buttons initially */
@@ -442,19 +442,25 @@
         }
 
         /* --- Back to Top Button --- */
+        /* Back to Top Button */
         #back-to-top {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            /* Adjust position */
+            left: 50%;
+            /* Center horizontally */
+            transform: translateX(-50%);
+            /* Fine-tune centering */
             background-color: var(--btt-bg);
             color: var(--btt-text);
             border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 22px;
-            line-height: 45px;
-            text-align: center;
+            border-radius: 25px;
+            /* Pill shape */
+            padding: 8px 20px;
+            /* Adjust padding */
+            font-size: 0.9rem;
+            /* Adjust font size */
+            font-weight: 500;
             cursor: pointer;
             box-shadow: 0 4px 12px var(--shadow-lg-color);
             opacity: 0;
@@ -462,16 +468,29 @@
             transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
             z-index: 1000;
             text-decoration: none;
+            display: inline-flex;
+            /* Align icon and text */
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #back-to-top .arrow {
+            /* Style for the arrow */
+            font-size: 1.2em;
+            line-height: 1;
         }
 
         #back-to-top.visible {
             opacity: 0.9;
             visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            /* Appear from bottom */
         }
 
         #back-to-top:hover {
             background-color: var(--btt-hover-bg);
-            transform: scale(1.1);
+            transform: translateX(-50%) scale(1.05);
+            /* Scale on hover */
             opacity: 1;
         }
 
@@ -804,7 +823,7 @@
 
         }
 
-      /* Footer */
+        /* Footer */
         .footer {
             text-align: center;
             margin-top: 2rem;
@@ -921,131 +940,132 @@
             </main>
 
             <!-- Back to Top Button HTML -->
-            <a href="#" id="back-to-top" aria-label="Back to Top" title="Back to Top" class="hide-for-pdf">↑</a>
+            <a href="#" id="back-to-top" aria-label="Back to Top" title="Back to Top">
+                <span class="arrow">↑</span> Back to Top
 
 
-            <script>
-                // --- Theme Toggle ---
-                function toggleTheme() {
-                    const html = document.documentElement;
-                    const currentTheme = html.getAttribute('data-theme');
-                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                    html.setAttribute('data-theme', newTheme);
-                    try {
-                        localStorage.setItem('theme', newTheme);
-                    } catch (e) {
-                        console.error("Could not save theme to localStorage", e);
-                    }
-                }
-
-                // --- PDF Generation Function (Revised Options) ---
-                // --- PDF Generation Functions (Using window.print) ---
-
-                function prepareForPrint() {
-                    console.log("--- prepareForPrint START ---");
-                    // Add a class to the body, styles in @media print will handle hiding/showing
-                    document.body.classList.add('print-active');
-
-                    // Update the document title for potentially better print headers/footers
-                    // You can customize this title further if needed
-                    document.title = "MyCollegeFinance - Financial Fundamentals";
-
-                    // NOTE: Unlike the budget planner, we don't need to dynamically create
-                    // '.print-value' spans here because the content is mostly static text.
-                    // We will rely purely on the @media print CSS rules to hide elements
-                    // like buttons, banners, etc.
-
-                    console.log("--- prepareForPrint END ---");
-                }
-
-                function restoreAfterPrint() {
-                    console.log("--- restoreAfterPrint START ---");
-                    // Remove the helper class from the body
-                    document.body.classList.remove('print-active');
-
-                    // Restore original title
-                    document.title = "My College Finance - Financial Success Fundamentals";
-
-                    // NOTE: No need to restore dynamically created spans or hidden inputs/labels
-                    // as they weren't manipulated in the adapted prepareForPrint function.
-                    // The browser handles reverting @media print styles automatically.
-
-                    console.log("--- restoreAfterPrint END ---");
-                }
-
-                function generatePDF() {
-                    // This function now uses the browser's native print functionality
-                    try {
-                        console.log("generatePDF called (using window.print)");
-                        prepareForPrint(); // Prepare the document (e.g., add class, set title)
-
-                        // Use setTimeout to allow the browser to potentially apply styles
-                        // before triggering the print dialog. 100-300ms is usually enough.
-                        setTimeout(() => {
-                            try {
-                                console.log("Calling window.print()...");
-                                window.print(); // Trigger the browser's print dialog
-                                console.log("window.print() called.");
-
-                                // Restore the page after a delay.
-                                // This delay is a bit arbitrary; it needs to be long enough
-                                // for the print dialog to be processed by the user, but
-                                // ideally not so long it's annoying if they cancel quickly.
-                                // Adjust the timeout (e.g., 1000ms = 1 second) if needed.
-                                setTimeout(restoreAfterPrint, 1500);
-
-                            } catch (printError) {
-                                console.error("Error during window.print():", printError);
-                                alert("An error occurred while trying to print.");
-                                restoreAfterPrint(); // Still try to restore on error
-                            }
-                        }, 300); // 300ms delay before printing
-
-                    } catch (prepareError) {
-                        console.error("Error during prepareForPrint():", prepareError);
-                        alert("An error occurred while preparing the document for printing.");
-                        restoreAfterPrint(); // Still try to restore on error
-                    }
-                }
-
-                // --- Back to Top Button Logic ---
-                const backToTopButtonInstance = document.getElementById('back-to-top');
-                if (backToTopButtonInstance) {
-                    window.addEventListener('scroll', () => {
-                        if (window.scrollY > 400) {
-                            backToTopButtonInstance.classList.add('visible');
-                        } else {
-                            backToTopButtonInstance.classList.remove('visible');
+                <script>
+                    // --- Theme Toggle ---
+                    function toggleTheme() {
+                        const html = document.documentElement;
+                        const currentTheme = html.getAttribute('data-theme');
+                        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                        html.setAttribute('data-theme', newTheme);
+                        try {
+                            localStorage.setItem('theme', newTheme);
+                        } catch (e) {
+                            console.error("Could not save theme to localStorage", e);
                         }
-                    });
-                    backToTopButtonInstance.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
+                    }
+
+                    // --- PDF Generation Function (Revised Options) ---
+                    // --- PDF Generation Functions (Using window.print) ---
+
+                    function prepareForPrint() {
+                        console.log("--- prepareForPrint START ---");
+                        // Add a class to the body, styles in @media print will handle hiding/showing
+                        document.body.classList.add('print-active');
+
+                        // Update the document title for potentially better print headers/footers
+                        // You can customize this title further if needed
+                        document.title = "MyCollegeFinance - Financial Fundamentals";
+
+                        // NOTE: Unlike the budget planner, we don't need to dynamically create
+                        // '.print-value' spans here because the content is mostly static text.
+                        // We will rely purely on the @media print CSS rules to hide elements
+                        // like buttons, banners, etc.
+
+                        console.log("--- prepareForPrint END ---");
+                    }
+
+                    function restoreAfterPrint() {
+                        console.log("--- restoreAfterPrint START ---");
+                        // Remove the helper class from the body
+                        document.body.classList.remove('print-active');
+
+                        // Restore original title
+                        document.title = "My College Finance - Financial Success Fundamentals";
+
+                        // NOTE: No need to restore dynamically created spans or hidden inputs/labels
+                        // as they weren't manipulated in the adapted prepareForPrint function.
+                        // The browser handles reverting @media print styles automatically.
+
+                        console.log("--- restoreAfterPrint END ---");
+                    }
+
+                    function generatePDF() {
+                        // This function now uses the browser's native print functionality
+                        try {
+                            console.log("generatePDF called (using window.print)");
+                            prepareForPrint(); // Prepare the document (e.g., add class, set title)
+
+                            // Use setTimeout to allow the browser to potentially apply styles
+                            // before triggering the print dialog. 100-300ms is usually enough.
+                            setTimeout(() => {
+                                try {
+                                    console.log("Calling window.print()...");
+                                    window.print(); // Trigger the browser's print dialog
+                                    console.log("window.print() called.");
+
+                                    // Restore the page after a delay.
+                                    // This delay is a bit arbitrary; it needs to be long enough
+                                    // for the print dialog to be processed by the user, but
+                                    // ideally not so long it's annoying if they cancel quickly.
+                                    // Adjust the timeout (e.g., 1000ms = 1 second) if needed.
+                                    setTimeout(restoreAfterPrint, 1500);
+
+                                } catch (printError) {
+                                    console.error("Error during window.print():", printError);
+                                    alert("An error occurred while trying to print.");
+                                    restoreAfterPrint(); // Still try to restore on error
+                                }
+                            }, 300); // 300ms delay before printing
+
+                        } catch (prepareError) {
+                            console.error("Error during prepareForPrint():", prepareError);
+                            alert("An error occurred while preparing the document for printing.");
+                            restoreAfterPrint(); // Still try to restore on error
+                        }
+                    }
+
+                    // --- Back to Top Button Logic ---
+                    const backToTopButtonInstance = document.getElementById('back-to-top');
+                    if (backToTopButtonInstance) {
+                        window.addEventListener('scroll', () => {
+                            if (window.scrollY > 400) {
+                                backToTopButtonInstance.classList.add('visible');
+                            } else {
+                                backToTopButtonInstance.classList.remove('visible');
+                            }
                         });
-                    });
-                }
+                        backToTopButtonInstance.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth'
+                            });
+                        });
+                    }
 
 
-                // --- Initial Load Logic ---
-                document.addEventListener('DOMContentLoaded', () => {
-                    try {
-                        const savedTheme = localStorage.getItem('theme');
-                        if (savedTheme === 'dark' || savedTheme === 'light') {
-                            document.documentElement.setAttribute('data-theme', savedTheme);
-                        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                            document.documentElement.setAttribute('data-theme', 'dark');
-                        } else {
+                    // --- Initial Load Logic ---
+                    document.addEventListener('DOMContentLoaded', () => {
+                        try {
+                            const savedTheme = localStorage.getItem('theme');
+                            if (savedTheme === 'dark' || savedTheme === 'light') {
+                                document.documentElement.setAttribute('data-theme', savedTheme);
+                            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                                document.documentElement.setAttribute('data-theme', 'dark');
+                            } else {
+                                document.documentElement.setAttribute('data-theme', 'light');
+                            }
+                        } catch (e) {
+                            console.error("Could not access theme preference", e);
                             document.documentElement.setAttribute('data-theme', 'light');
                         }
-                    } catch (e) {
-                        console.error("Could not access theme preference", e);
-                        document.documentElement.setAttribute('data-theme', 'light');
-                    }
-                    console.log("Page loaded. Current theme:", document.documentElement.getAttribute('data-theme'));
-                });
-            </script>
+                        console.log("Page loaded. Current theme:", document.documentElement.getAttribute('data-theme'));
+                    });
+                </script>
 
 </body>
 
